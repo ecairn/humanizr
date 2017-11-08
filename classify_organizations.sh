@@ -17,20 +17,20 @@ OUTPUT_FNAME=$DIR/output.tsv
 
 while [[ $# > 1 ]]
 do
-key="$1"
-case $key in
-    -h|--help)
-    usage
-    ;;
-    -o|--output)
-    OUTPUT_FNAME="$2"
-    shift
-    ;;
-esac
-shift
+  key="$1"
+  case $key in
+      -h|--help)
+      usage
+      ;;
+      -o|--output)
+      OUTPUT_FNAME="$2"
+      shift
+      ;;
+  esac
+  shift
 done
 OUTPUT="${OUTPUT_FNAME}"
-if [[ -n $1 ]]; 
+if [[ -n $1 ]];
     then
         TWEET_DIR=$1
     else

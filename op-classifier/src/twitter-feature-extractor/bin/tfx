@@ -21,14 +21,14 @@ Handle the command-line args (the path to the conf file, and a debug flag)
 argparser = argparse.ArgumentParser(description='Extract features from Twitter users')
 
 argparser.add_argument('conf_file',
-                    help='path to the configuration file (JSON)')
+    help='path to the configuration file (JSON)')
 
 argparser.add_argument('tweet_dir',
-                    help='path to the directory storing all the tweets (one tweet JSON per file)')
+    help='path to the directory storing all the tweets (one tweet JSON per file)')
 
 argparser.add_argument('--debug',
-                    action='store_true',
-                    help='enable debug mode')
+    action='store_true',
+    help='enable debug mode')
 
 args = argparser.parse_args()
 

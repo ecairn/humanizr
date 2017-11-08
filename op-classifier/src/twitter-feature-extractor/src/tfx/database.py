@@ -172,7 +172,7 @@ class JSONFiles:
         as outlined by Twitter's REST API.
         """
 
-            # Path to directory of tweets
+        # Path to directory of tweets
         if tweet_dir.endswith("/"):
             self.tweet_dir = tweet_dir[:-1]
         else:
@@ -188,33 +188,34 @@ class JSONFiles:
         if len(json_files) < 1:
             logging.error('Empty tweet JSON directory.')
             exit()
-            for f in json_files:
-                try:
-                    f = open(tweet_dir + '/' + f, 'r')
-                    for line in f:
-                        try:
-                            tweet_json = json.loads(line.strip())
-                        except:
-                            continue
-                        user_id = tweet_json['user']['id_str']
-                        label = 0
-                        if label not in self.profiles:
-                            self.profiles[label] = {}
-                        if user_id not in self.profiles[label]:
-                            self.tweets[user_id] = []
-                            self.profiles[label][user_id] = tweet_json['user']
-                        temp_timestamps = tweet_json['created_at'].split(' ')
-                        filtered_timestamps = []
-                        for tt in temp_timestamps:
-                            if '+' not in tt and '-' not in tt:
-                                filtered_timestamps.append(tt)
-                        timestamp = ' '.join(filtered_timestamps)
-                        self.tweets[user_id].append((
-                            tweet_json.get('full_text', tweet_json.get('text')),
-                            datetime.datetime.strptime(timestamp, "%a %b %d %H:%M:%S %Y")))
-                except ValueError as e:
-                    print str(e)
-                    logging.warn("Invalid JSON file: %s" % f)
+
+        for f in json_files:
+            try:
+                f = open(tweet_dir + '/' + f, 'r')
+                for line in f:
+                    try:
+                        tweet_json = json.loads(line.strip())
+                    except:
+                        continue
+                    user_id = tweet_json['user']['id_str']
+                    label = 0
+                    if label not in self.profiles:
+                        self.profiles[label] = {}
+                    if user_id not in self.profiles[label]:
+                        self.tweets[user_id] = []
+                        self.profiles[label][user_id] = tweet_json['user']
+                    temp_timestamps = tweet_json['created_at'].split(' ')
+                    filtered_timestamps = []
+                    for tt in temp_timestamps:
+                        if '+' not in tt and '-' not in tt:
+                            filtered_timestamps.append(tt)
+                    timestamp = ' '.join(filtered_timestamps)
+                    self.tweets[user_id].append((
+                        tweet_json.get('full_text', tweet_json.get('text')),
+                        datetime.datetime.strptime(timestamp, "%a %b %d %H:%M:%S %Y")))
+            except ValueError as e:
+                print str(e)
+                logging.warn("Invalid JSON file: %s" % f)
 
         max_count = 0
         for uid in self.tweets:
