@@ -17,22 +17,22 @@ class CustomInstallCommand(install):
 
 
 setup(
-	cmdclass={
+    cmdclass={
         'install': CustomInstallCommand,
     },
-	name = 'ml-classifier',
-	version = '1.0',
-	packages = ['ml2'],
+    name = 'ml-classifier',
+    version = '1.0',
+    packages = ['ml2'],
         package_dir = {'ml2': 'src/ml2' },
-	package_data = {'ml2': ['scripts/classifier', 'scripts/xvalidator', 'algs/libsvm-3.1/svm-train',
+    package_data = {'ml2': ['scripts/classifier', 'scripts/xvalidator', 'algs/libsvm-3.1/svm-train',
                                 'algs/libsvm-3.1/svm-predict',
                                 'algs/libsvm-3.1/svm-scale'], },
-	#package_data = {'ml2': ['default_hermesrc']},
-	
-	# project metadata
-	author = 'Faiyaz Zamal',
-	author_email = 'faiyaz.zamal@mail.mcgill.ca',
-	description = 'A system for inferring demographics for Twitter users.',
+    #package_data = {'ml2': ['default_hermesrc']},
+
+    # project metadata
+    author = 'Faiyaz Zamal',
+    author_email = 'faiyaz.zamal@mail.mcgill.ca',
+    description = 'A system for inferring demographics for Twitter users.',
         license = 'BSD',
-	#url = 'http://www.networkdynamics.org',
+    #url = 'http://www.networkdynamics.org',
 )

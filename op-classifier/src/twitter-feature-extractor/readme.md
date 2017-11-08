@@ -58,9 +58,10 @@ The configuration file should be a plain text file containing a [JSON](http://ww
   `db`, representing the hostname, username, password, and database name,
   respectively.
 * `attribute`: a human-readable name for the attribute being studied (e.g.,
-  "gender").  `labels`: a dictionary with two entries, one for each binary
+  "gender").
+* `labels`: a dictionary with two entries, one for each binary
   label. Each key is the human-readable name of the label (e.g., "male" or
-* "female); each value is the ID of the label as is indicated in the `labels`
+  "female); each value is the ID of the label as is indicated in the `labels`
   table of the database.
 * `limit`: the number of users to study per limit (an integer)
 * `features`: a dictionary with two entries.

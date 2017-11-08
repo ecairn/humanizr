@@ -30,7 +30,7 @@ def clean(text):
         text = text.replace('RT: ', '')
 
     #text = text.lower()
-    
+
     # Now get rid of the URLs starting with http:// (links appear shortened so, no https)
     text = re.sub(r'[ ]*http:\/\/[^ ]+', '', text)
 

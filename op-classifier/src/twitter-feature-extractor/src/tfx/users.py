@@ -62,11 +62,11 @@ class UserSet:
         # Might have passed in information to connect to mysql db
         #try:
         #    self.connection = database.Connection(**conf.mysql)
-        # Or have everything in text files 
+        # Or have everything in text files
         #except (AttributeError, TypeError):
         #    print "Didn't find mysql, trying files..."
         #    self.connection = database.TextFile(**conf.files)
-	self.connection = database.JSONFiles(tweet_dir)
+        self.connection = database.JSONFiles(tweet_dir)
 
         self.labels = conf.labels
         self.user_ids = {}
@@ -97,8 +97,8 @@ class UserSet:
 
             user_profile = self.connection.get_profile_for_user(user_id)
             user_tweets = self.connection.get_tweets_for_user(user_id)
-            
-	    # If there is no profile or tweet data for this user, skip
+
+            # If there is no profile or tweet data for this user, skip
             if user_profile and user_tweets:
                 user = User(user_id, user_profile, user_tweets)
                 num_users += 1

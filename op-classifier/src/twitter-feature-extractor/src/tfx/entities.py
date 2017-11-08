@@ -43,7 +43,7 @@ class TweetExtractorBase(EntityExtractorBase):
         return counter
 
     def get_tweet_entities(self, message, cleaned_message, timestamp):
-        text = cleaned_message if self.needs_clean else message 
+        text = cleaned_message if self.needs_clean else message
         self.entities.extend(self.process_text(text))
 
 
@@ -51,7 +51,7 @@ class WordExtractor(TweetExtractorBase):
     entity = 'words'
 
     def process_text(self, text):
-	text = ''.join(ch for ch in text.lower() if ch not in exclude_punctuation)
+        text = ''.join(ch for ch in text.lower() if ch not in exclude_punctuation)
         return filter(len, text.split(' '))
 
 
@@ -59,7 +59,7 @@ class DigramExtractor(TweetExtractorBase):
     entity = 'digrams'
 
     def process_text(self, text):
-	text = ''.join(ch for ch in text.lower() if ch not in exclude_punctuation)
+        text = ''.join(ch for ch in text.lower() if ch not in exclude_punctuation)
         text = ' %s ' % text
         digrams = []
 
@@ -67,7 +67,7 @@ class DigramExtractor(TweetExtractorBase):
             digram = '%c%c' % (text[i], text[i+1])
             if digram != '  ':
                 digrams.append(digram)
-        
+
         return digrams
 
 
@@ -75,7 +75,7 @@ class TrigramExtractor(TweetExtractorBase):
     entity = 'trigrams'
 
     def process_text(self, text):
-	text = ''.join(ch for ch in text.lower() if ch not in exclude_punctuation)
+        text = ''.join(ch for ch in text.lower() if ch not in exclude_punctuation)
         text = ' %s ' % text
         trigrams = []
 
@@ -90,7 +90,7 @@ class StemExtractor(TweetExtractorBase):
     entity = 'stems'
 
     def process_text(self, text):
-	text = ''.join(ch for ch in text.lower() if ch not in exclude_punctuation)
+        text = ''.join(ch for ch in text.lower() if ch not in exclude_punctuation)
         return map(lovins.stem, filter(len, text.split(' ')))
 
 
@@ -123,7 +123,7 @@ class HashtagExtractor(TweetExtractorBase):
                         # If there is no hashtag found, do nothing?
                         pass
 
-        return hashtags 
+        return hashtags
 
 
 class MentionExtractor(TweetExtractorBase):
@@ -162,7 +162,7 @@ class NumTweetsExtractor(TweetExtractorBase):
         return self.num
 
 
-class NumRetweetsExtractor(NumTweetsExtractor):       
+class NumRetweetsExtractor(NumTweetsExtractor):
     entity = 'num_retweets'
 
     def get_tweet_entities(self, message, cleaned_message, timestamp):

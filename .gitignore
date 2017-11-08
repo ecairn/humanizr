@@ -1,0 +1,8 @@
+dist/
+Humanizr.egg-info
+build/
+svm-predict
+svm-scale
+svm-train
+*.o
+*.pyc

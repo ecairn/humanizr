@@ -28,7 +28,7 @@ def D(base):
 def E(base):
     # E  Do not remove ending after e
     return base[-1] != "e"
-    
+
 def F(base):
     # F  Minimum stem length = 3 and do not remove ending after e
     return len(base) > 2 and base[-1] != "e"
@@ -41,28 +41,28 @@ def H(base):
     # H  Remove ending only after t or ll
     c1, c2 = base[-2:]
     return c2 == "t" or (c2 == "l" and c1 == "l")
-    
+
 def I(base):
     # I  Do not remove ending after o or e
     c = base[-1]
     return c != "o" and c != "e"
-    
+
 def J(base):
     # J  Do not remove ending after a or e
     c = base[-1]
     return c != "a" and c != "e"
-    
+
 def K(base):
     # K  Minimum stem length = 3 and remove ending only after l, i or u*e
     c = base[-1]
     cc = base[-3]
     return len(base) > 2 and (c == "l" or c == "i" or (c == "e" and cc == "u"))
-    
+
 def L(base):
     # L  Do not remove ending after u, x or s, unless s follows o
     c1, c2 = base[-2:]
     return c2 != "u" and c2 != "x" and (c2 != "s" or c1 == "o")
-    
+
 def M(base):
     # M  Do not remove ending after a, c, e or m
     c = base[-1]
@@ -76,11 +76,11 @@ def O(base):
     # O  Remove ending only after l or i
     c = base[-1]
     return c == "l" or c == "i"
- 
+
 def P(base):
     # P  Do not remove ending after c
     return base[-1] != "c"
-    
+
 def Q(base):
     # Q  Minimum stem length = 3 and do not remove ending after l or n
     c = base[-1]
@@ -120,7 +120,7 @@ def X(base):
     c = base[-1]
     cc = base[-3]
     return c == "l" or c == "i" or (c == "e" and cc == "u")
-    
+
 def Y(base):
     # Y  Remove ending only after in
     return base[-2:] == "in"
@@ -135,7 +135,7 @@ def a(base):
     l2 = base[-2:]
     return (c == "d" or c == "f" or l2 == "ph" or l2 == "th" or c == "l"
             or l2 == "er" or l2 == "or" or l2 == "es" or c == "t")
-    
+
 def b(base):
     # b  Minimum stem length = 3 and do not remove ending after met or ryst
     return len(base) > 2 and not (base.endswith("met")
@@ -519,7 +519,7 @@ _doubles = frozenset(("dd", "gg", "ll", "mm", "nn", "pp", "rr", "ss", "tt"))
 def fix_ending(word):
     if word[-2:] in _doubles:
         word = word[:-1]
-    
+
     for endingrule in _endingrules[word[-1]]:
         target, newend = endingrule[:2]
         if word.endswith(target):
@@ -527,9 +527,9 @@ def fix_ending(word):
                 exceptafter = endingrule[2]
                 c = word[0-(len(target)+1)]
                 if c in exceptafter: return word
-            
+
             return word[:0-len(target)] + newend
-    
+
     return word
 
 
