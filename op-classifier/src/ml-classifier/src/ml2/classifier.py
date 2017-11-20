@@ -173,15 +173,12 @@ if __name__ == '__main__':
     tfact = TrainerFactory()
     trainer = tfact.make_trainer(settings_file)
     if(training_file_provided and model_file==None): # Only the training file is provided. But no model file to save.
-        print 'INFO: Training file provided but no model...'
         cl = Classifier(trainer,training_data_set,test_data_set)
     elif(training_file_provided and model_file<>None): # the training file and model file, both provided. Model file will be used for output (save).
-        print 'INFO: Training and model files provided...'
         cl = Classifier(trainer,training_data_set,test_data_set,use_saved_model=False,saved_model_file=model_file,normalization_min_values=observed_min_values)
 
 
     else: # No training file provided. So model_file is used to get the model
-        print 'INFO: No training file provided...'
         cl = Classifier(trainer,None,test_data_set,use_saved_model=True,saved_model_file=model_file)
 
     cl.classify()
