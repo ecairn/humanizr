@@ -26,6 +26,9 @@ argparser.add_argument('conf_file',
 argparser.add_argument('tweet_dir',
     help='path to the directory storing all the tweets (one tweet JSON per file)')
 
+argparser.add_argument('output_file',
+    help='path to the output file')
+
 argparser.add_argument('--debug',
     action='store_true',
     help='enable debug mode')
@@ -47,6 +50,8 @@ Make sure the conf file is valid
 try:
     conf = confparse.ConfParser()
     conf.load(args.conf_file)
+    # change the output file
+    conf.output_file = args.output_file
 except errors.ConfFileError as error:
     argparser.error("Invalid configuration file: %s" % error)
 

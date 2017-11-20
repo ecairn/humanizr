@@ -16,16 +16,15 @@ import json
 
 
 def main():
-	if(len(sys.argv)<2):
-		print 'Usage export_settings_file_to_json settings_file'
-		return
-	input_file=sys.argv[1]
-	settings=eval(open(input_file,'r').read())
-	output_file=sys.argv[1][0:sys.argv[1].find('.txt')]+'.json'
-	fout=open(output_file,'w')
-	fout.write(json.dumps(settings,fout))
-	fout.close()
+    if(len(sys.argv)<2):
+        print 'Usage export_settings_file_to_json settings_file'
+        return
+    input_file=sys.argv[1]
+    settings=eval(open(input_file,'r').read())
+    output_file=sys.argv[1][0:sys.argv[1].find('.txt')]+'.json'
+    fout=open(output_file,'w')
+    fout.write(json.dumps(settings,fout))
+    fout.close()
 
 if __name__ == '__main__':
-	main()
-
+    main()
