@@ -21,3 +21,10 @@ class Trainer:
         the data set.
         """
         raise Exception, 'train method is not implemented'
+
+    def cleanup(self):
+        """
+        This methods cleans up temporary/working directories and files used by
+        the trainer.
+        """
+        pass

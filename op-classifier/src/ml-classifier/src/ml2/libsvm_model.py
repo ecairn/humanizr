@@ -17,7 +17,6 @@ import json
 import tempfile
 import shutil
 
-
 class LibSVMModel(Model):
     # Liblinear package model
     # each model is actually referring to a file
@@ -43,7 +42,7 @@ class LibSVMModel(Model):
 
     def change_file_suffix(self,new_suffix):
         LibSVMModel._file_suffix=new_suffix
-    #
+
     def save(self,model_file_location,normalization_min_values=None):
         save_dict=dict()
         save_dict['normalization_min_values']=normalization_min_values
@@ -71,8 +70,6 @@ class LibSVMModel(Model):
         fout=open(model_file_location,'w')
         fout.write(json.dumps(save_dict,fout))
         fout.close()
-
-
 
     @staticmethod
     def load(model_file_location):
@@ -104,7 +101,6 @@ class LibSVMModel(Model):
         ret.change_file_suffix(obj['_file_suffix'])
         fin.close()
         return(ret)
-
 
     def predict(self,data_set):
 
@@ -139,7 +135,7 @@ class LibSVMModel(Model):
                 logging.debug( accuracy
                 break
         '''
-        #
+
         predicted_values=Prediction(data_set)
         fin=open(output_filename,'r')
         i=0
@@ -157,10 +153,7 @@ class LibSVMModel(Model):
         Cleans up the temporary directory used to make the predictions.
         """
         shutil.rmtree(self._tmp_folder_location)
-        os.rmdir(self._tmp_folder_location)
 
-    #
-    #
     # helper method
     # Given the dataset object, this method creates a validation file
 

@@ -10,9 +10,7 @@ Copyright (c) 2011 __MyCompanyName__. All rights reserved.
 import sys
 import os
 from model import Model, Prediction
-import subprocess
 import shutil
-
 
 class LinearSVMModel(Model):
     # Liblinear package model
@@ -87,7 +85,6 @@ class LinearSVMModel(Model):
         Cleans up the temporary directory used to make the predictions.
         """
         shutil.rmtree(self._tmp_folder_location)
-        os.rmdir(self._tmp_folder_location)
 
     #
     #

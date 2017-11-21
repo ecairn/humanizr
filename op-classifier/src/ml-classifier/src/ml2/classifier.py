@@ -7,7 +7,6 @@ import sys
 import os
 import json
 
-
 class Classifier:
     """
     This class runs cross-validation on a data set and trainer combination.
@@ -24,13 +23,11 @@ class Classifier:
             self._model=self._trainer.load_model(saved_model_file)
         self._saved_model_file=saved_model_file
 
-
-
     def predictions(self):
         return(self._prediction.predictions())
+
     def accuracy(self):
         return(self._prediction.accuracy())
-
 
     def classify(self):
 
@@ -42,17 +39,13 @@ class Classifier:
 
     def cleanup(self):
         """
-        Cleans up the classifier. Delegates to the model which should know
-        what files to clean up.
+        Cleans up the classifier. Delegates to the trainer and model which
+        should know what files to clean up.
         """
+        trainer.cleanup()
+
         if(self._model<>None):
-            try:
-                self._model.cleanup()
-            except:
-                pass
-
-
-
+            self._model.cleanup()
 
     def prediction_composition(self):
         composition_dict=dict()
@@ -67,7 +60,6 @@ class Classifier:
 
 #
 #
-
 def read_model_file_normalization_min_values(model_file):
     # load the model_file
     fin_model=open(model_file,'r')
@@ -75,10 +67,8 @@ def read_model_file_normalization_min_values(model_file):
     fin_model.close()
     return(model_file_contents['normalization_min_values'])
 
-
 class InvalidModelFileToReadException(Exception):
     pass
-
 
 
 if __name__ == '__main__':
@@ -96,8 +86,6 @@ if __name__ == '__main__':
     parser.add_argument('-o','--output_file',action='store',default=None,help='output file to save')
     parser.add_argument('-d','--debug',action='store_true',help='Debug mode')
 
-
-
     args=parser.parse_args()
 
     # read in arguments
@@ -109,9 +97,6 @@ if __name__ == '__main__':
     # Redirecting the stdout to the output file.
     if(args.output_file<>None):
         sys.stdout=open(args.output_file,'w')
-
-
-
 
     if(args.debug):
         logging.basicConfig(level=logging.DEBUG,filename='classifier_log_'+os.path.basename(test_ds_file)+'_'+str(os.getpid())+'.log')
@@ -132,7 +117,6 @@ if __name__ == '__main__':
         # check if the model_file actually exists
         if(os.path.exists(model_file)==False):
             raise InvalidModelFileToReadException
-
 
     # load the data set
     if(training_file_provided):
@@ -172,11 +156,12 @@ if __name__ == '__main__':
     # create the trainer
     tfact = TrainerFactory()
     trainer = tfact.make_trainer(settings_file)
+
     if(training_file_provided and model_file==None): # Only the training file is provided. But no model file to save.
         cl = Classifier(trainer,training_data_set,test_data_set)
+
     elif(training_file_provided and model_file<>None): # the training file and model file, both provided. Model file will be used for output (save).
         cl = Classifier(trainer,training_data_set,test_data_set,use_saved_model=False,saved_model_file=model_file,normalization_min_values=observed_min_values)
-
 
     else: # No training file provided. So model_file is used to get the model
         cl = Classifier(trainer,None,test_data_set,use_saved_model=True,saved_model_file=model_file)
@@ -190,6 +175,3 @@ if __name__ == '__main__':
         print '%s\t%s' % (uid, translate[label])
     #print cl.accuracy()
     #print cl.prediction_composition()
-
-    '''
-    '''

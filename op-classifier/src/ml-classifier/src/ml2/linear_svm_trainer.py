@@ -90,13 +90,8 @@ class LinearSVMTrainer(Trainer):
 
         Option -v randomly splits the data into n parts and calculates cross
         validation accuracy on them.
-
-
-
-
-
         '''
-        #
+
         trainer_package_parameters=self.trainer_settings['trainer_package_parameters']
         args=[]
         args.append(self.trainer_settings['training_program_path'])
@@ -128,8 +123,7 @@ class LinearSVMTrainer(Trainer):
         LinearSVMTrainer._file_suffix+=1
 
         return(learned_model_object)
-    #
-    #
+
     # Helper method
     # creates a training set file for the liblinear package
     def create_training_set_file_from_dataset(self,data_set):
@@ -148,6 +142,5 @@ class LinearSVMTrainer(Trainer):
                     # As the index starts from 1
                     fout.write(str(i+1)+':'+str(features[i])+' ')
                 fout.write('\n')
-
 
         fout.close()

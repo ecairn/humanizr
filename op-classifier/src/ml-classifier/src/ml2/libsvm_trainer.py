@@ -50,7 +50,7 @@ class LibSVMTrainer(Trainer):
 
         self.trainer_settings['model_filename']='learned_model_file.libsvm'+'_'+str(LibSVMTrainer._file_suffix)
         logging.debug('Temporary folder:' +self.trainer_settings['temporary_folder_location'])
-    #
+
     def load_model(self,saved_model_file):
         """
         This method is used to return the saved model object.
@@ -97,13 +97,8 @@ class LibSVMTrainer(Trainer):
 
         Option -v randomly splits the data into n parts and calculates cross
         validation accuracy on them.
-
-
-
-
-
         '''
-        #
+
         trainer_package_parameters=self.trainer_settings['trainer_package_parameters']
         if(self.trainer_settings['perform_grid_search']==True):
             # perform grid search to find the best parameters
@@ -142,8 +137,7 @@ class LibSVMTrainer(Trainer):
         #LibSVMTrainer._file_suffix+=1
 
         return(learned_model_object)
-    #
-    #
+
     # Helper method
     # creates a training set file for the liblinear package
     def create_training_set_file_from_dataset(self,data_set,outfile=''):
@@ -168,7 +162,7 @@ class LibSVMTrainer(Trainer):
 
 
         fout.close()
-    #
+
     def generate_folds(self,data_set,num_fold):
         """
         Generate smaller, non-overlapping data sets from the master data set.
@@ -201,6 +195,7 @@ class LibSVMTrainer(Trainer):
                 if(current_fold==num_fold):
                     current_fold=0
         return folds
+
     def grid_search(self,data_set):
         # returns the optimal c and g values for the given dataset.
         # Performs cross-validation on the training set.
@@ -364,3 +359,9 @@ class LibSVMTrainer(Trainer):
             return(2**(c_value+c_min),2**(g_value+g_min))
         else:
             return(c_value+c_min,g_value+g_min)
+
+    def cleanup(self):
+        """
+        Cleans up the temporary directory used to make the predictions.
+        """
+        shutil.rmtree(self.trainer_settings['temporary_folder_location'])

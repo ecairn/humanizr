@@ -11,7 +11,6 @@ class Prediction:
         else:
             self._predictions = predictions
 
-
     def items(self):
         return self._data_set.get_items()
 
@@ -20,9 +19,9 @@ class Prediction:
 
     def est_label(self,item):
         return self._predictions[item]
+
     def set_est_label(self,item,label):
         self._predictions[item]=label
-
 
     def sensitivity(self):
         # TP/TP+FN
@@ -31,6 +30,7 @@ class Prediction:
 
     def specificity(self):
         return 0
+
     def labels(self):
         # returns set of all the labels
         labels=set()
@@ -38,6 +38,7 @@ class Prediction:
             if(self.true_label(item) not in labels):
                 labels.add(self.true_label(item))
         return(labels)
+
     def sensitivity_by_label(self):
         labels=self.labels()
         num_label=len(labels)
@@ -59,12 +60,6 @@ class Prediction:
 
         return sensitivity_dict
 
-
-
-
-
-
-
     def accuracy(self):
         total_count=0
         accurate_count=0
@@ -74,16 +69,17 @@ class Prediction:
             if(int(self.true_label(item))==int(self.est_label(item))):
                 accurate_count+=1
         return accurate_count*1.0/total_count
+
     def size(self):
         return len(self._data_set.get_items())
+
     def predicted_count(self):
         return len(self._predictions)
+
     def predictions(self):
         return self._predictions
 
 class Model:
-
-
 
     def predict(self,data_set):
         """
@@ -91,3 +87,10 @@ class Model:
         is a Prediction object.
         """
         raise Exception, 'predict is not implemented'
+
+    def cleanup(self):
+        """
+        This methods cleans up temporary/working directories and files used by
+        the model.
+        """
+        pass
